@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using OrganizeYou.BLL.Interfaces;
+using OrganizeYou.BLL.Services;
+using OrganizeYou.DAL.EF;
+
 namespace OrganizeYou.Web
 {
     public class Program
@@ -8,6 +13,13 @@ namespace OrganizeYou.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            //builder.Services.AddDbContext<AppDbContext>(options =>
+            //    options.UseSqlServer(connectionString,
+            //    x => x.MigrationsAssembly("OrganaizeYou.OrganaizeYou.DLL")));
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connectionString));
+            builder.Services.AddScoped<ITaskService, TaskService>();
 
             var app = builder.Build();
 
