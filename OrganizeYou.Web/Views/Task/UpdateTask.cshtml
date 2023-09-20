@@ -1,0 +1,33 @@
+﻿@model TaskViewModel
+@{
+    List<StatusViewModel> statuses = ViewData["Statuses"] as List<StatusViewModel> ?? throw new Exception("No statuses found");
+}
+
+<div class="text-center m-5">
+    <h1>Редактирование задачи</h1>
+    <form method="post" asp-area="" asp-controller="Task" asp-action="UpdateTask">
+        <input asp-for="Title" type="text" value="@Model.Title" /> <br />
+        <input asp-for="Description" class="mt-2" type="text" value="@Model.Description" /> <br />
+        <p class="w-25 m-auto align-content-center mt-2">
+           Дата создания:
+           <input asp-for="Created" type="date" value="@Model.Created.ToString("yyyy-MM-dd")" class="mt-2" />
+            <br />
+            Дата окончания:
+            <input asp-for="Completion" type="date" value="@Model.Completion.ToString("yyyy-MM-dd")" class="mt-2" />
+        </p>
+        <p class="w-25 m-auto align-content-center mt-2">
+        Статус:
+        <select asp-for="Status" class="custom-select">
+        <option selected>@Model.Status</option>
+           @for(int i = 0; i < statuses.Count(); i++)
+           {
+               if (Model.Status == statuses[i].Name)
+                     continue;
+
+               <option value="@statuses[i].Name">@statuses[i].Name</option>
+           }
+            </select>
+        </p>
+        <button class="btn btn-success mt-3">Сохранить изменения</button>
+    </form>
+</div>
