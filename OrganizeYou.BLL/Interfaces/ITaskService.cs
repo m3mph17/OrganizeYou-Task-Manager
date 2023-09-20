@@ -7,6 +7,8 @@ namespace OrganizeYou.BLL.Interfaces
     {
         void CreateTask(TaskObjectDTO taskDto);
         TaskObjectDTO GetTask(int? id);
+        void DeleteTask(int? id);
+        void UpdateTask(TaskObjectDTO taskDto);
         IEnumerable<TaskObjectDTO> GetTasks();
         void Dispose();
     }
