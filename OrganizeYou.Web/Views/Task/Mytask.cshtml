@@ -1,0 +1,16 @@
+﻿@model TaskViewModel
+@{
+}
+
+
+<div class="text-center m-5">
+    <h1>@Model.Title</h1>
+    <h3 class="mb-3">@Model.Description</h3>
+    <p class="w-25 m-auto">Статус: @Model.Status</p>
+    <p class="w-25 m-auto align-content-center">Создана: @Model.Created.ToShortDateString()</p>
+    <p class="w-25 m-auto">Заканчивается: @Model.Completion.ToShortDateString()</p>
+
+    <form method="get" asp-area="" asp-controller="Task" asp-action="UpdateTask" asp-route-id="@Model.Id">
+        <button class="btn btn-warning mt-3">Редактировать</button>
+    </form>
+</div>

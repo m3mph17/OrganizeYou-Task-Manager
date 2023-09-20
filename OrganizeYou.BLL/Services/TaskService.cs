@@ -51,16 +51,40 @@ namespace OrganizeYou.BLL.Services
         {
             TaskObject task = new TaskObject
             {
-                Id = taskDto.Id,
                 Title = taskDto.Title,
                 Description = taskDto.Description,
-                Created = taskDto.Created,
+                Created = DateTime.Now,
                 Completion = taskDto.Completion,
-                Status = taskDto.Status
+                Status = Database.Statuses.Get(1)
             };
-
             Database.Tasks.Create(task);
             Database.Save();
+        }
+
+        public void UpdateTask(TaskObjectDTO taskDto)
+        {
+            TaskObject task = Database.Tasks.Get(taskDto.Id);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TaskObjectDTO, TaskObject>()).CreateMapper();
+            TaskObject taskUpdated = mapper.Map<TaskObjectDTO, TaskObject>(taskDto);
+
+            if (task == null || task == taskUpdated)
+            {
+                return;
+            }
+            else
+            {
+                Database.Tasks.Update(taskUpdated);
+                Database.Save();
+            }
+        }
+
+        public void DeleteTask(int? id)
+        {
+            if(id != null)
+            {
+                Database.Tasks.Delete(id.Value);
+                Database.Save();
+            }
         }
     }
 }

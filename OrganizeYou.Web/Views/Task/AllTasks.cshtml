@@ -1,0 +1,50 @@
+﻿@model List<TaskViewModel>
+@{
+    ViewData["Title"] = "My Tasks";
+}
+
+<div class="text-center mt-5">
+<h1>Мои задачи</h1>
+    <table class="table mt-5 align-content-center align-text-bottom">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Статус</th>
+                <th>Создана</th>
+                <th>Заканчивается</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (TaskViewModel task in Model)
+    {
+        
+            <tr>
+                <td>
+                    <form method="get" asp-area="" asp-controller="Task" asp-action="Mytask" asp-route-id="@task.Id">
+                        <button class="btn btn-dark">></button>
+                    </form>
+                </td>
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>@task.Status</td>
+                <td>@task.Created.ToShortDateString()</td>
+                <td>@task.Completion.ToShortDateString()</td>
+                <td>
+                    <form asp-area="" asp-controller="Task" asp-action="DeleteTask" asp-route-id="@task.Id">
+                        <button class="btn btn-danger">X</button>
+                    </form>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
+
+<form method="get" asp-area="" asp-controller="Task" asp-action="NewTask">
+    <button class="btn btn-primary float-end">Новая задача</button>
+</form>
+
+

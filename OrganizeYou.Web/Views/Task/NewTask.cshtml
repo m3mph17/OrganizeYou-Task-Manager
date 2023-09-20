@@ -1,0 +1,18 @@
+﻿@model TaskViewModel
+@{
+}
+
+<div class="text-center mt-5">
+    <h1>Создание задачи</h1>
+<form method="post" asp-controller="Task" asp-action="CreateTask">
+    <div class="form-group">
+        <label class="control-label text">Название</label><br />
+        <input type="text" name="title" /><br />
+        <label class="control-label">Описание</label><br />
+        <input type="text" name="description" /><br />
+        <label class="control-label">Дата завершения</label><br />
+        <input type="date" name="completion" /><br />
+    </div>
+    <input type="submit" value="Создать" class="btn btn-primary mt-3" />
+</form>
+</div>
