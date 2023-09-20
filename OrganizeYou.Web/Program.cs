@@ -20,6 +20,7 @@ namespace OrganizeYou.Web
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddScoped<ITaskService, TaskService>();
+            builder.Services.AddScoped<IStatusService, StatusService>();
 
             var app = builder.Build();
 
