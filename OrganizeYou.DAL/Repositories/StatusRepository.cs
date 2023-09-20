@@ -40,7 +40,17 @@ namespace OrganizeYou.DAL.Repositories
 
         public Status Get(int id)
         {
-            Status item = _db.Statuses.Find(id);
+            Status item = _db.Statuses.Where(s => s.Id == id).First();
+
+            if (item != null)
+                return item;
+            else
+                return null;
+        }
+
+        public Status Get(string name)
+        {
+            Status item = _db.Statuses.Where(s => s.Name == name).First();
 
             if (item != null)
                 return item;
