@@ -31,6 +31,9 @@ namespace OrganizeYou.BLL.Services
         public TaskObjectDTO GetTask(int? id)
         {
             TaskObject task = Database.Tasks.Get(id.Value);
+            if (task == null)
+                return null;
+
             return new TaskObjectDTO
             {
                 Id = task.Id,
@@ -53,7 +56,7 @@ namespace OrganizeYou.BLL.Services
             {
                 Title = taskDto.Title,
                 Description = taskDto.Description,
-                Created = DateTime.Now,
+                Created = taskDto.Created,
                 Completion = taskDto.Completion,
                 Status = Database.Statuses.Get(1)
             };
