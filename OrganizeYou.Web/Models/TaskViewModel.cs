@@ -1,16 +1,25 @@
 ﻿using OrganizeYou.BLL.DTO;
 using OrganizeYou.DAL.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrganizeYou.Web.Models
 {
     public class TaskViewModel
     {
         public int Id { get; set; }
+
+        [Required]
         public string Title { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
+        [Required]
         public DateTime Created { get; set; }
+
+        [Required]
         public DateTime Completion { get; set; }
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         public TaskObjectDTO Convert(StatusDTO status)
         {
