@@ -13,7 +13,7 @@
            <input asp-for="Created" type="date" value="@Model.Created.ToString("yyyy-MM-dd")" class="mt-2" />
             <br />
             Дата окончания:
-            <input asp-for="Completion" type="date" value="@Model.Completion.ToString("yyyy-MM-dd")" class="mt-2" />
+            <input asp-for="Completion" min="@DateTime.Now.ToString("yyyy-MM-dd")" type="date" value="@Model.Completion.ToString("yyyy-MM-dd")" class="mt-2" />
         </p>
         <p class="w-25 m-auto align-content-center mt-2">
         Статус:

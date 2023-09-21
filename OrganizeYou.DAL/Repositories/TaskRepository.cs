@@ -59,8 +59,13 @@ namespace OrganizeYou.DAL.Repositories
 
         public IEnumerable<TaskObject> GetAll()
         {
-            var query = _db.Tasks.Include(t => t.Status); ;
-            return query.ToList();
+            var query = _db.Tasks.Include(t => t.Status);
+            var tasks = query.ToList();
+
+            if (tasks.Count == 0)
+                return null;
+
+            return tasks;
         }
 
         public void Update(TaskObject item)

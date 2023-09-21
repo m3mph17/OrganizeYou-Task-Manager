@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OrganizeYou.BLL.DTO;
 using OrganizeYou.BLL.Interfaces;
 using OrganizeYou.Web.Models;
@@ -27,6 +28,10 @@ namespace OrganizeYou.Web.Controllers
             var tasksDto = _taskService.GetTasks().ToList();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TaskObjectDTO, TaskViewModel>()).CreateMapper();
             var taskViewModel = mapper.Map<List<TaskObjectDTO>, List<TaskViewModel>>(tasksDto);
+
+            if (taskViewModel == null)
+                return NotFound();
+
             return View(taskViewModel);
         }
 
@@ -35,6 +40,10 @@ namespace OrganizeYou.Web.Controllers
             var taskDto = _taskService.GetTask(id);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TaskObjectDTO, TaskViewModel>()).CreateMapper();
             var taskViewModel = mapper.Map<TaskObjectDTO, TaskViewModel>(taskDto);
+
+            if (taskViewModel == null)
+                return NotFound();
+
             return View(taskViewModel);
         }
 
@@ -46,6 +55,9 @@ namespace OrganizeYou.Web.Controllers
         [HttpPost]
         public IActionResult CreateTask(TaskViewModel task)
         {
+            if (ModelState.IsValid == false)
+                return Content("Ошибка валидации. Попробуйте ещё раз.");
+
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TaskViewModel, TaskObjectDTO>()).CreateMapper();
             TaskObjectDTO taskDto = mapper.Map<TaskViewModel, TaskObjectDTO>(task);
             _taskService.CreateTask(taskDto);
@@ -71,13 +83,16 @@ namespace OrganizeYou.Web.Controllers
 
 
             ViewData["Statuses"] = statusViewModels;
+
+            if (taskViewModel == null)
+                return NotFound();
+
             return View(taskViewModel);
         }
 
         [HttpPost]
         public IActionResult UpdateTask(TaskViewModel task)
         {
-            // TODO Update task code
             TaskObjectDTO taskObjectDTO = task.Convert(_statusService.GetStatus(task.Status));
 
             _taskService.UpdateTask(taskObjectDTO);

@@ -4,15 +4,16 @@
 
 <div class="text-center mt-5">
     <h1>Создание задачи</h1>
+
 <form method="post" asp-controller="Task" asp-action="CreateTask">
-    <div class="form-group">
-        <label class="control-label text">Название</label><br />
-        <input type="text" name="title" /><br />
-        <label class="control-label">Описание</label><br />
-        <input type="text" name="description" /><br />
-        <label class="control-label">Дата завершения</label><br />
-        <input type="date" name="completion" /><br />
-    </div>
-    <input type="submit" value="Создать" class="btn btn-primary mt-3" />
+        <label asp-for="Title" class="control-label text">Название</label><br />
+        <input asp-for="Title" type="text" name="title" /><br />
+        <label asp-for="Description"  class="control-label">Описание</label><br />
+        <input asp-for="Description" type="text" name="description" /><br />
+        <label asp-for="Completion" class="control-label">Дата начала</label><br />
+        <input asp-for="Created" type="date" name="created" /><br />
+        <label asp-for="Completion" class="control-label">Дата завершения</label><br />
+        <input asp-for="Completion" min="@DateTime.Now.ToString("yyyy-MM-dd")" type="date" name="completion" /><br />
+        <input type="submit" value="Создать" class="btn btn-primary mt-3" />
 </form>
 </div>
