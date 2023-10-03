@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OrganizeYou.BLL.DTO;
@@ -28,6 +29,7 @@ namespace OrganizeYou.Web.Controllers
             var tasksDto = _taskService.GetTasks().ToList();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<TaskObjectDTO, TaskViewModel>()).CreateMapper();
             var taskViewModel = mapper.Map<List<TaskObjectDTO>, List<TaskViewModel>>(tasksDto);
+
 
             if (taskViewModel == null)
                 return NotFound();
