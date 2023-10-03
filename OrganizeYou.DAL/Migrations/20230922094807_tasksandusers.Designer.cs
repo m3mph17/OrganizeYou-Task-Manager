@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrganizeYou.DAL.EF;
 
@@ -11,9 +12,11 @@ using OrganizeYou.DAL.EF;
 namespace OrganizeYou.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230922094807_tasksandusers")]
+    partial class tasksandusers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,18 +40,6 @@ namespace OrganizeYou.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "user"
-                        });
                 });
 
             modelBuilder.Entity("OrganizeYou.DAL.Entities.Status", b =>
@@ -146,15 +137,6 @@ namespace OrganizeYou.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "admin@mail.ru",
-                            Password = "testAdmin2209",
-                            RoleId = 1
-                        });
                 });
 
             modelBuilder.Entity("OrganizeYou.DAL.Entities.TaskObject", b =>
