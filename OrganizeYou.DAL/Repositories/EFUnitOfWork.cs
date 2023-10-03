@@ -9,6 +9,8 @@ namespace OrganizeYou.DAL.Repositories
         private readonly AppDbContext _db;
         private TaskRepository taskRepository;
         private StatusRepository statusRepository;
+        private UserRepository userRepository;
+        private RoleRepository roleRepository;
 
         public EFUnitOfWork(AppDbContext db)
         {
@@ -34,6 +36,28 @@ namespace OrganizeYou.DAL.Repositories
                     statusRepository = new StatusRepository(_db);
 
                 return statusRepository;
+            }
+        }
+
+        public IRepository<User> Users
+        {
+            get
+            {
+                if (userRepository == null)
+                    userRepository = new UserRepository(_db);
+
+                return userRepository;
+            }
+        }
+
+        public IRepository<Role> Roles
+        {
+            get
+            {
+                if (roleRepository == null)
+                    roleRepository = new RoleRepository(_db);
+
+                return roleRepository;
             }
         }
 

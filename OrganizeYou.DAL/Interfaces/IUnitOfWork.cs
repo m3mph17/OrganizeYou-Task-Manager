@@ -12,6 +12,8 @@ namespace OrganizeYou.DAL.Interfaces
     {
         IRepository<TaskObject> Tasks { get; }
         IRepository<Status> Statuses { get; }
+        IRepository<User> Users { get; }
+        IRepository<Role> Roles { get; }
         void Save();
     }
 }
