@@ -29,6 +29,23 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="AllTasks">My tasks</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav flex-grow-2">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>

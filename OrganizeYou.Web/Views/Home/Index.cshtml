@@ -1,10 +1,14 @@
-﻿@model List<TaskViewModel>
+﻿@using System.Security.Claims;
+@model List<TaskViewModel>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>OrganizeYou - планировщик задач</h1>
+    @if (User.Identity.IsAuthenticated == true)
+    {
+        <h4>Добро пожаловать, @User.Identity.Name</h4>
+    }
 </div>
